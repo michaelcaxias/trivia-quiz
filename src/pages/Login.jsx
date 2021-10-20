@@ -27,6 +27,7 @@ export default class Login extends Component {
 
   render() {
     const { name, email } = this.state;
+    const { history } = this.props;
     const disabled = name !== '' && email !== '';
     return (
       <section>
@@ -52,6 +53,13 @@ export default class Login extends Component {
         >
           Jogar
 
+        </button>
+        <button
+          onClick={ () => history.push('/settings') }
+          data-testid="btn-settings"
+          type="button"
+        >
+          Configurações
         </button>
       </section>
     );
