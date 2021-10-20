@@ -2,7 +2,9 @@ import { GET_NAME, GET_EMAIL } from '../actions';
 
 const initialState = {
   name: '',
-  email: '',
+  assertions: 0,
+  score: 0,
+  gravatarEmail: '',
 };
 
 export default (state = initialState, { type, payload }) => {
@@ -13,7 +15,7 @@ export default (state = initialState, { type, payload }) => {
     };
   case GET_EMAIL:
     return { ...state,
-      email: payload,
+      gravatarEmail: payload,
     };
 
   default:

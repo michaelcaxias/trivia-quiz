@@ -30,7 +30,7 @@ Header.propTypes = {
 
 const mapStateToProps = (payload) => ({
   name: payload.userReducer.name,
-  email: payload.userReducer.email,
+  email: payload.userReducer.gravatarEmail,
 });
 
 export default connect(mapStateToProps)(Header);

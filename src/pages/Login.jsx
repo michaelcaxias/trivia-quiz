@@ -42,6 +42,7 @@ class Login extends Component {
           name="name"
           value={ name }
           onChange={ this.handleChange }
+          placeholder="Nome"
         />
         <input
           type="text"
@@ -49,6 +50,7 @@ class Login extends Component {
           name="email"
           value={ email }
           onChange={ this.handleChange }
+          placeholder="Email"
         />
         <button
           type="button"
