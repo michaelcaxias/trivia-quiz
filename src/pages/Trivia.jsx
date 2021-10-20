@@ -3,17 +3,28 @@ import { connect } from 'react-redux';
 import React, { Component } from 'react';
 import Header from '../components/Header';
 import { fetchTrivia } from '../redux/actions';
+import './Trivia.css';
 
 class Trivia extends Component {
   constructor() {
     super();
     this.Content = this.Content.bind(this);
+    this.handleClick = this.handleClick.bind(this);
   }
 
   componentDidMount() {
     const { jsonToGlobalState } = this.props;
     const token = localStorage.getItem('token');
     jsonToGlobalState(token);
+  }
+
+  handleClick() {
+    const rightBtn = document.querySelector('.correct-answer');
+    const wrongBtn = document.querySelectorAll('.wrong-answer');
+    rightBtn.classList.add('correct_answer');
+    wrongBtn.forEach((button) => {
+      button.classList.add('wrong_answer');
+    });
   }
 
   Content() {
@@ -25,12 +36,22 @@ class Trivia extends Component {
         <p data-testid="question-category">{ category }</p>
         <p data-testid="question-text">{ question }</p>
         <section>
-          <button data-testid="correct-answer" type="button">{ correctAnswer }</button>
+          <button
+            data-testid="correct-answer"
+            className="correct-answer"
+            type="button"
+            onClick={ this.handleClick }
+          >
+            { correctAnswer }
+
+          </button>
           { incorrectAnswers.map((answer, i) => (
             <button
               key={ i }
               data-testid={ `wrong-answer-${i}` }
+              className="wrong-answer"
               type="button"
+              onClick={ this.handleClick }
             >
               { answer }
 
