@@ -1,5 +1,7 @@
 export const GET_NAME = 'GET_NAME';
 export const GET_EMAIL = 'GET_EMAIL';
+export const REQUESTING_ENDPOINT = 'REQUESTING_ENDPOINT';
+export const GET_JSON = 'GET_JSON';
 
 export const getName = (payload) => ({
   type: GET_NAME,
@@ -10,3 +12,19 @@ export const getEmail = (payload) => ({
   type: GET_EMAIL,
   payload,
 });
+
+export const requestingEndpoint = () => ({
+  type: REQUESTING_ENDPOINT,
+});
+
+export const getJson = (payload) => ({
+  type: GET_JSON,
+  payload,
+});
+
+export const fetchTrivia = (token) => async (dispatch) => {
+  dispatch(requestingEndpoint());
+  const request = await fetch(`https://opentdb.com/api.php?amount=5&token=${token}`);
+  const resolve = await request.json();
+  dispatch(getJson(resolve.results));
+};
