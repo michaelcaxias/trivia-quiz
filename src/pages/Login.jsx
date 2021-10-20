@@ -1,7 +1,9 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { getEmail, getName } from '../redux/actions';
 
-export default class Login extends Component {
+class Login extends Component {
   constructor(props) {
     super(props);
 
@@ -18,10 +20,13 @@ export default class Login extends Component {
   }
 
   async handleClick() {
-    const { history } = this.props;
+    const { history, nameToGlobalState, emailToGlobalState } = this.props;
+    const { name, email } = this.state;
     const request = await fetch('https://opentdb.com/api_token.php?command=request');
     const resolve = await request.json();
     localStorage.setItem('token', resolve.token);
+    nameToGlobalState(name);
+    emailToGlobalState(email);
     history.push('/trivia');
   }
 
@@ -67,7 +72,18 @@ export default class Login extends Component {
 }
 
 Login.propTypes = {
+  emailToGlobalState: PropTypes.func,
   history: PropTypes.shape({
     push: PropTypes.func,
   }).isRequired,
-};
+  nameToGlobalState: PropTypes.func,
+}.isRequired;
+
+const mapDispatchToProps = (dispatch) => (
+  {
+    nameToGlobalState: (name) => dispatch(getName(name)),
+    emailToGlobalState: (email) => dispatch(getEmail(email)),
+  }
+);
+
+export default connect(null, mapDispatchToProps)(Login);
