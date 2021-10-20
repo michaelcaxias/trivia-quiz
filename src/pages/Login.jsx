@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 
 export default class Login extends Component {
@@ -9,10 +10,19 @@ export default class Login extends Component {
       email: '',
     };
     this.handleChange = this.handleChange.bind(this);
+    this.handleClick = this.handleClick.bind(this);
   }
 
   handleChange({ target: { name, value } }) {
     this.setState({ [name]: value });
+  }
+
+  async handleClick() {
+    const { history } = this.props;
+    const request = await fetch('https://opentdb.com/api_token.php?command=request');
+    const resolve = await request.json();
+    localStorage.setItem('token', resolve.token);
+    history.push('/trivia');
   }
 
   render() {
@@ -37,6 +47,7 @@ export default class Login extends Component {
         <button
           type="button"
           disabled={ !disabled }
+          onClick={ this.handleClick }
           data-testid="btn-play"
         >
           Jogar
@@ -46,3 +57,9 @@ export default class Login extends Component {
     );
   }
 }
+
+Login.propTypes = {
+  history: PropTypes.shape({
+    push: PropTypes.func,
+  }).isRequired,
+};
