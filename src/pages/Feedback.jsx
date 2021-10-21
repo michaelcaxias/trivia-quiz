@@ -1,13 +1,17 @@
 import React, { Component } from 'react';
+import Header from '../components/Header';
 
 class Feedback extends Component {
   render() {
     return (
-      <main>
-        <section data-testid="feedback-text">
-          Feedback
-        </section>
-      </main>
+      <>
+        <Header />
+        <main>
+          <section data-testid="feedback-text">
+            feedback
+          </section>
+        </main>
+      </>
     );
   }
 }

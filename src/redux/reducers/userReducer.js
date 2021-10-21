@@ -1,4 +1,4 @@
-import { GET_NAME, GET_EMAIL } from '../actions';
+import { GET_NAME, GET_EMAIL, GET_PLAYER } from '../actions';
 
 const initialState = {
   name: '',
@@ -16,6 +16,10 @@ export default (state = initialState, { type, payload }) => {
   case GET_EMAIL:
     return { ...state,
       gravatarEmail: payload,
+    };
+  case GET_PLAYER:
+    return {
+      ...payload,
     };
 
   default:

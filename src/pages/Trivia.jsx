@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import React, { Component } from 'react';
 import Header from '../components/Header';
-import { fetchTrivia } from '../redux/actions';
+import { fetchTrivia, sendInfosPlayer } from '../redux/actions';
 import './Trivia.css';
 
 class Trivia extends Component {
@@ -86,8 +86,9 @@ class Trivia extends Component {
 
   nextQuestion() {
     const FINAL_QUESTION_INDEX = 4;
-    const { questionIndex } = this.state;
-    const { history } = this.props;
+    const { questionIndex, player } = this.state;
+    const { history, dispatchPlayerToGlobalState } = this.props;
+    dispatchPlayerToGlobalState(player);
     if (questionIndex === FINAL_QUESTION_INDEX) {
       history.push('/feedback');
     } else {
@@ -208,6 +209,7 @@ Trivia.propTypes = {
 const mapDispatchToProps = (dispatch) => (
   {
     jsonToGlobalState: (token) => dispatch(fetchTrivia(token)),
+    dispatchPlayerToGlobalState: (player) => dispatch(sendInfosPlayer(player)),
   }
 );
 
