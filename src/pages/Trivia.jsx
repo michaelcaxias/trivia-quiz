@@ -8,27 +8,57 @@ import './Trivia.css';
 class Trivia extends Component {
   constructor() {
     super();
+    this.state = {
+      time: 30,
+    };
+
     this.Content = this.Content.bind(this);
     this.handleClick = this.handleClick.bind(this);
+    this.updateSeconds = this.updateSeconds.bind(this);
   }
 
   componentDidMount() {
     const { jsonToGlobalState } = this.props;
     const token = localStorage.getItem('token');
     jsonToGlobalState(token);
+    this.updateSeconds();
+  }
+
+  componentDidUpdate() {
+    const { time } = this.state;
+    const TIME_LIMIT = 0;
+    if (time === TIME_LIMIT) {
+      this.borderColor();
+    }
   }
 
   handleClick() {
+    this.borderColor();
+  }
+
+  borderColor() {
+    clearInterval(this.timer);
     const rightBtn = document.querySelector('.correct-answer');
     const wrongBtn = document.querySelectorAll('.wrong-answer');
     rightBtn.classList.add('correct_answer');
+    rightBtn.disabled = true;
     wrongBtn.forEach((button) => {
       button.classList.add('wrong_answer');
+      button.disabled = true;
     });
+  }
+
+  updateSeconds() {
+    const ONE_SECOND = 1000;
+    this.timer = setInterval(() => {
+      console.log('teste');
+      this.setState((prevState) => ({ time: prevState.time - 1 }));
+    }, ONE_SECOND);
   }
 
   Content() {
     const { questions, index } = this.props;
+    const { time } = this.state;
     const { category, question, correct_answer: correctAnswer,
       incorrect_answers: incorrectAnswers } = questions[index];
     return (
@@ -58,6 +88,9 @@ class Trivia extends Component {
             </button>
           )) }
         </section>
+        <h1>
+          { time }
+        </h1>
       </section>
     );
   }
