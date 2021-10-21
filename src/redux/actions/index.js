@@ -2,6 +2,7 @@ export const GET_NAME = 'GET_NAME';
 export const GET_EMAIL = 'GET_EMAIL';
 export const REQUESTING_ENDPOINT = 'REQUESTING_ENDPOINT';
 export const GET_JSON = 'GET_JSON';
+export const GET_PLAYER = 'GET_PLAYER';
 
 export const getName = (payload) => ({
   type: GET_NAME,
@@ -19,6 +20,11 @@ export const requestingEndpoint = () => ({
 
 export const getJson = (payload) => ({
   type: GET_JSON,
+  payload,
+});
+
+export const sendInfosPlayer = (payload) => ({
+  type: GET_PLAYER,
   payload,
 });
 

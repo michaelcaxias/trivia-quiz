@@ -8,7 +8,7 @@ const EMAIL_TO_HASH = (email) => md5(email).toString();
 
 class Header extends Component {
   render() {
-    const { name, email } = this.props;
+    const { player: { name, email, score } } = this.props;
     return (
       <header>
         <img
@@ -17,7 +17,7 @@ class Header extends Component {
           data-testid="header-profile-picture"
         />
         <span data-testid="header-player-name">{ name }</span>
-        <span data-testid="header-score">0</span>
+        <span data-testid="header-score">{ score }</span>
       </header>
     );
   }
@@ -28,9 +28,8 @@ Header.propTypes = {
   name: PropTypes.string,
 }.isRequired;
 
-const mapStateToProps = (payload) => ({
-  name: payload.userReducer.name,
-  email: payload.userReducer.gravatarEmail,
+const mapStateToProps = (state) => ({
+  player: state.userReducer,
 });
 
 export default connect(mapStateToProps)(Header);
