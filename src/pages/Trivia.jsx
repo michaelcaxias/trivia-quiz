@@ -6,15 +6,23 @@ import { fetchTrivia } from '../redux/actions';
 import './Trivia.css';
 
 class Trivia extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
+    const { nameFromGlobalState, emailFromGlobalState } = props;
     this.state = {
       time: 30,
+      player: {
+        name: nameFromGlobalState,
+        assertions: '',
+        score: 0,
+        gravatarEmail: emailFromGlobalState,
+      },
     };
 
     this.Content = this.Content.bind(this);
     this.handleClick = this.handleClick.bind(this);
     this.updateSeconds = this.updateSeconds.bind(this);
+    this.saveLocalStorage = this.saveLocalStorage.bind(this);
   }
 
   componentDidMount() {
@@ -22,6 +30,7 @@ class Trivia extends Component {
     const token = localStorage.getItem('token');
     jsonToGlobalState(token);
     this.updateSeconds();
+    this.saveLocalStorage();
   }
 
   componentDidUpdate() {
@@ -32,8 +41,44 @@ class Trivia extends Component {
     }
   }
 
-  handleClick() {
+  getScore(answer) {
+    if (answer === 'right') {
+      const EASY = 1;
+      const MEDIUM = 2;
+      const HARD = 3;
+
+      const TEN = 10;
+
+      const { time } = this.state;
+      const { questions, index } = this.props;
+      switch (questions[index].difficulty) {
+      case 'easy':
+        return TEN + (time * EASY);
+      case 'medium':
+        return TEN + (time * MEDIUM);
+      case 'hard':
+        return TEN + (time * HARD);
+      default:
+        return 0;
+      }
+    }
+    return 0;
+  }
+
+  saveLocalStorage() {
+    const { player } = this.state;
+    localStorage.setItem('state', JSON.stringify({ player }));
+  }
+
+  handleClick({ target: { name } }) {
     this.borderColor();
+    const newScore = this.getScore(name);
+    this.setState((prevState) => ({
+      player: {
+        ...prevState.player,
+        score: prevState.player.score + newScore,
+      },
+    }), () => this.saveLocalStorage());
   }
 
   borderColor() {
@@ -51,7 +96,6 @@ class Trivia extends Component {
   updateSeconds() {
     const ONE_SECOND = 1000;
     this.timer = setInterval(() => {
-      console.log('teste');
       this.setState((prevState) => ({ time: prevState.time - 1 }));
     }, ONE_SECOND);
   }
@@ -69,6 +113,7 @@ class Trivia extends Component {
           <button
             data-testid="correct-answer"
             className="correct-answer"
+            name="right"
             type="button"
             onClick={ this.handleClick }
           >
@@ -80,6 +125,7 @@ class Trivia extends Component {
               key={ i }
               data-testid={ `wrong-answer-${i}` }
               className="wrong-answer"
+              name="wrong"
               type="button"
               onClick={ this.handleClick }
             >
@@ -127,6 +173,8 @@ const mapStateToProps = (state) => (
     isFetching: state.triviaReducer.isFetching,
     questions: state.triviaReducer.questions,
     index: state.triviaReducer.index,
+    nameFromGlobalState: state.userReducer.name,
+    emailFromGlobalState: state.userReducer.gravatarEmail,
   }
 );
 
