@@ -14,7 +14,7 @@ class Trivia extends Component {
       questionIndex: 0,
       player: {
         name: nameFromGlobalState,
-        assertions: '',
+        assertions: 0,
         score: 0,
         gravatarEmail: emailFromGlobalState,
       },
@@ -26,6 +26,7 @@ class Trivia extends Component {
     this.saveLocalStorage = this.saveLocalStorage.bind(this);
     this.nextQuestion = this.nextQuestion.bind(this);
     this.removeColor = this.removeColor.bind(this);
+    this.countAssertions = this.countAssertions.bind(this);
   }
 
   componentDidMount() {
@@ -75,6 +76,7 @@ class Trivia extends Component {
 
   handleClick({ target: { name } }) {
     this.borderColor();
+    this.countAssertions(name);
     const newScore = this.getScore(name);
     this.setState((prevState) => ({
       player: {
@@ -82,6 +84,17 @@ class Trivia extends Component {
         score: prevState.player.score + newScore,
       },
     }), () => this.saveLocalStorage());
+  }
+
+  countAssertions(name) {
+    if (name === 'right') {
+      this.setState((prevState) => ({
+        player: {
+          ...prevState.player,
+          assertions: prevState.player.assertions + 1,
+        },
+      }));
+    }
   }
 
   nextQuestion() {
