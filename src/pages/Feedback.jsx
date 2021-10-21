@@ -5,7 +5,7 @@ import Header from '../components/Header';
 
 class Feedback extends Component {
   render() {
-    const { player: { assertions, score } } = this.props;
+    const { player: { assertions, score }, history } = this.props;
     const THREE = 3;
     return (
       <>
@@ -22,6 +22,14 @@ class Feedback extends Component {
               assertions >= THREE ? 'Mandou bem!' : 'Podia ser melhor...'
             }
           </h1>
+          <button
+            data-testid="btn-play-again"
+            type="button"
+            onClick={ () => history.push('/') }
+          >
+            Jogar Novamente
+
+          </button>
         </main>
       </>
     );
@@ -32,6 +40,9 @@ Feedback.propTypes = {
   player: PropTypes.shape({
     assertions: PropTypes.number,
     score: PropTypes.number,
+  }),
+  history: PropTypes.shape({
+    push: PropTypes.func,
   }),
 }.isRequired;
 
