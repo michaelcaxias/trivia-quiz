@@ -11,6 +11,7 @@ class Trivia extends Component {
     const { nameFromGlobalState, emailFromGlobalState } = props;
     this.state = {
       time: 30,
+      questionIndex: 0,
       player: {
         name: nameFromGlobalState,
         assertions: '',
@@ -23,6 +24,8 @@ class Trivia extends Component {
     this.handleClick = this.handleClick.bind(this);
     this.updateSeconds = this.updateSeconds.bind(this);
     this.saveLocalStorage = this.saveLocalStorage.bind(this);
+    this.nextQuestion = this.nextQuestion.bind(this);
+    this.removeColor = this.removeColor.bind(this);
   }
 
   componentDidMount() {
@@ -49,9 +52,9 @@ class Trivia extends Component {
 
       const TEN = 10;
 
-      const { time } = this.state;
-      const { questions, index } = this.props;
-      switch (questions[index].difficulty) {
+      const { time, questionIndex } = this.state;
+      const { questions } = this.props;
+      switch (questions[questionIndex].difficulty) {
       case 'easy':
         return TEN + (time * EASY);
       case 'medium':
@@ -81,16 +84,41 @@ class Trivia extends Component {
     }), () => this.saveLocalStorage());
   }
 
+  nextQuestion() {
+    this.setState((prevState) => ({
+      ...prevState,
+      questionIndex: prevState.questionIndex + 1,
+      time: 30,
+    }));
+    this.removeColor();
+    this.updateSeconds();
+  }
+
   borderColor() {
     clearInterval(this.timer);
     const rightBtn = document.querySelector('.correct-answer');
     const wrongBtn = document.querySelectorAll('.wrong-answer');
+    const nextBtn = document.querySelector('.btn-next');
     rightBtn.classList.add('correct_answer');
     rightBtn.disabled = true;
     wrongBtn.forEach((button) => {
       button.classList.add('wrong_answer');
       button.disabled = true;
     });
+    nextBtn.className = 'visible';
+  }
+
+  removeColor() {
+    const rightBtn = document.querySelector('.correct-answer');
+    const wrongBtn = document.querySelectorAll('.wrong-answer');
+    const nextBtn = document.querySelector('.visible');
+    rightBtn.classList.remove('correct_answer');
+    rightBtn.disabled = false;
+    wrongBtn.forEach((button) => {
+      button.classList.remove('wrong_answer');
+      button.disabled = false;
+    });
+    nextBtn.className = 'btn-next';
   }
 
   updateSeconds() {
@@ -101,10 +129,10 @@ class Trivia extends Component {
   }
 
   Content() {
-    const { questions, index } = this.props;
-    const { time } = this.state;
+    const { questions } = this.props;
+    const { time, questionIndex } = this.state;
     const { category, question, correct_answer: correctAnswer,
-      incorrect_answers: incorrectAnswers } = questions[index];
+      incorrect_answers: incorrectAnswers } = questions[questionIndex];
     return (
       <section>
         <p data-testid="question-category">{ category }</p>
@@ -134,6 +162,15 @@ class Trivia extends Component {
             </button>
           )) }
         </section>
+        <button
+          onClick={ this.nextQuestion }
+          type="button"
+          data-testid="btn-next"
+          className="btn-next"
+        >
+          Próxima
+
+        </button>
         <h1>
           { time }
         </h1>
@@ -159,7 +196,6 @@ Trivia.propTypes = {
   isFetching: PropTypes.any,
   jsonToGlobalState: PropTypes.func,
   questions: PropTypes.any,
-  index: PropTypes.number,
 }.isRequired;
 
 const mapDispatchToProps = (dispatch) => (
@@ -172,7 +208,6 @@ const mapStateToProps = (state) => (
   {
     isFetching: state.triviaReducer.isFetching,
     questions: state.triviaReducer.questions,
-    index: state.triviaReducer.index,
     nameFromGlobalState: state.userReducer.name,
     emailFromGlobalState: state.userReducer.gravatarEmail,
   }
