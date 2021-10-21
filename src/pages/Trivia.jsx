@@ -85,13 +85,20 @@ class Trivia extends Component {
   }
 
   nextQuestion() {
-    this.setState((prevState) => ({
-      ...prevState,
-      questionIndex: prevState.questionIndex + 1,
-      time: 30,
-    }));
-    this.removeColor();
-    this.updateSeconds();
+    const FINAL_QUESTION_INDEX = 4;
+    const { questionIndex } = this.state;
+    const { history } = this.props;
+    if (questionIndex === FINAL_QUESTION_INDEX) {
+      history.push('/feedback');
+    } else {
+      this.setState((prevState) => ({
+        ...prevState,
+        questionIndex: prevState.questionIndex + 1,
+        time: 30,
+      }));
+      this.removeColor();
+      this.updateSeconds();
+    }
   }
 
   borderColor() {
