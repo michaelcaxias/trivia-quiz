@@ -5,11 +5,11 @@ import gravatarImage from '../services';
 
 class Header extends Component {
   render() {
-    const { player: { name, email, score } } = this.props;
+    const { player: { name, gravatarEmail, score } } = this.props;
     return (
       <header>
         <img
-          src={ gravatarImage(email) }
+          src={ gravatarImage(gravatarEmail) }
           alt="Gravatar"
           data-testid="header-profile-picture"
         />

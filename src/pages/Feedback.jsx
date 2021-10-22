@@ -14,10 +14,10 @@ class Feedback extends Component {
   addPlayerRanking() {
     // https://github.com/tryber/sd-07-project-trivia-react-redux/blob/main-group-8-req17Fix/src/pages/Feedback.js
     const {
-      player: { name, score, email },
+      player: { name, score, gravatarEmail },
       dispatchUpdateranking,
     } = this.props;
-    const picture = GRAVATAR_EMAIL(email);
+    const picture = GRAVATAR_EMAIL(gravatarEmail);
     const ranking = { name, score, picture };
     dispatchUpdateranking(ranking);
   }
