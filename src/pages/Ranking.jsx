@@ -7,7 +7,7 @@ class Ranking extends Component {
     return ranking.map((element, index) => (
       <section key={ index }>
         <span data-testid={ `player-name-${index}` }>{element.name}</span>
-        <span data-testid={ `player-name-${index}` }>{element.score}</span>
+        <span data-testid={ `player-score-${index}` }>{element.score}</span>
         <img src={ element.picture } alt={ element.name } />
       </section>
     ));
