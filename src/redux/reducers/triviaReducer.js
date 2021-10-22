@@ -1,7 +1,8 @@
-import { REQUESTING_ENDPOINT, GET_JSON } from '../actions';
+import { REQUESTING_ENDPOINT, GET_JSON, UPDATE_RANKING } from '../actions';
 
 const initialState = {
   questions: [],
+  ranking: [],
   isFetching: true,
   index: 0,
 };
@@ -16,6 +17,11 @@ export default (state = initialState, { type, payload }) => {
     return { ...state,
       questions: payload,
       isFetching: false,
+    };
+  case UPDATE_RANKING:
+    return {
+      ...state,
+      ranking: [...state.ranking, payload],
     };
   default:
     return state;
