@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 
 class Ranking extends Component {
   renderRanking() {
-    const ranking = JSON.parse(localStorage.getItem('ranking'));
+    const ranking = JSON.parse(localStorage.getItem('ranking'))
+      .sort((a, b) => b.score - a.score);
     return ranking.map((element, index) => (
       <section key={ index }>
         <span data-testid={ `player-name-${index}` }>{element.name}</span>
