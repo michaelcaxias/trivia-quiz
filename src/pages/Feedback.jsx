@@ -2,8 +2,33 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Header from '../components/Header';
+import { updateRanking } from '../redux/actions';
+import GRAVATAR_EMAIL from '../services';
 
 class Feedback extends Component {
+  async componentDidMount() {
+    await this.addPlayerRanking();
+    this.savePlayerLocalStorage();
+  }
+
+  addPlayerRanking() {
+    // https://github.com/tryber/sd-07-project-trivia-react-redux/blob/main-group-8-req17Fix/src/pages/Feedback.js
+    const {
+      player: { name, score, email },
+      dispatchUpdateranking,
+    } = this.props;
+    const picture = GRAVATAR_EMAIL(email);
+    const ranking = { name, score, picture };
+    dispatchUpdateranking(ranking);
+  }
+
+  savePlayerLocalStorage() {
+    const { rankingList } = this.props;
+    localStorage.setItem('ranking', JSON.stringify(
+      rankingList.sort((a, b) => b.score - a.score),
+    ));
+  }
+
   render() {
     const { player: { assertions, score }, history } = this.props;
     const THREE = 3;
@@ -45,19 +70,24 @@ class Feedback extends Component {
 }
 
 Feedback.propTypes = {
-  player: PropTypes.shape({
-    assertions: PropTypes.number,
-    score: PropTypes.number,
-  }),
+  dispatchUpdateranking: PropTypes.func,
   history: PropTypes.shape({
     push: PropTypes.func,
   }),
+  rankingList: PropTypes.any,
 }.isRequired;
 
 const mapStateToProps = (state) => (
   {
     player: state.userReducer,
+    rankingList: state.triviaReducer.ranking,
   }
 );
 
-export default connect(mapStateToProps)(Feedback);
+const mapDispatchToProps = (dispatch) => (
+  {
+    dispatchUpdateranking: (ranking) => dispatch(updateRanking(ranking)),
+  }
+);
+
+export default connect(mapStateToProps, mapDispatchToProps)(Feedback);
