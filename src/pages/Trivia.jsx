@@ -156,12 +156,15 @@ class Trivia extends Component {
       incorrect_answers: incorrectAnswers } = questions[questionIndex];
     return (
       <section>
+        <h1 className="timer">
+          { time }
+        </h1>
         <p data-testid="question-category">{ category }</p>
-        <p data-testid="question-text">{ question }</p>
+        <p className="question" data-testid="question-text">{ question }</p>
         <section>
           <button
             data-testid="correct-answer"
-            className="correct-answer"
+            className="correct-answer btn"
             name="right"
             type="button"
             onClick={ this.handleClick }
@@ -173,7 +176,7 @@ class Trivia extends Component {
             <button
               key={ i }
               data-testid={ `wrong-answer-${i}` }
-              className="wrong-answer"
+              className="wrong-answer btn"
               name="wrong"
               type="button"
               onClick={ this.handleClick }
@@ -192,9 +195,6 @@ class Trivia extends Component {
           Próxima
 
         </button>
-        <h1>
-          { time }
-        </h1>
       </section>
     );
   }

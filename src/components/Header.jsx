@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import md5 from 'crypto-js/md5';
 import { connect } from 'react-redux';
+import './Header.css';
 
 const GRAVATAR = 'https://www.gravatar.com/avatar/';
 const EMAIL_TO_HASH = (email) => md5(email).toString();
@@ -12,6 +13,7 @@ class Header extends Component {
     return (
       <header>
         <img
+          className="gravatar"
           src={ `${GRAVATAR}${EMAIL_TO_HASH(email)}` }
           alt="Gravatar"
           data-testid="header-profile-picture"

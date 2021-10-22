@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { getEmail, getName } from '../redux/actions';
+import './Login.css';
 
 class Login extends Component {
   constructor(props) {
@@ -35,8 +36,9 @@ class Login extends Component {
     const { history } = this.props;
     const disabled = name !== '' && email !== '';
     return (
-      <section>
+      <section className="conteiner">
         <input
+          className="input is-primary"
           type="text"
           data-testid="input-player-name"
           name="name"
@@ -45,6 +47,7 @@ class Login extends Component {
           placeholder="Nome"
         />
         <input
+          className="input is-primary"
           type="text"
           data-testid="input-gravatar-email"
           name="email"
@@ -52,22 +55,26 @@ class Login extends Component {
           onChange={ this.handleChange }
           placeholder="Email"
         />
-        <button
-          type="button"
-          disabled={ !disabled }
-          onClick={ this.handleClick }
-          data-testid="btn-play"
-        >
-          Jogar
+        <div>
+          <button
+            className="button is-primary is-outlined"
+            type="button"
+            disabled={ !disabled }
+            onClick={ this.handleClick }
+            data-testid="btn-play"
+          >
+            Jogar
 
-        </button>
-        <button
-          onClick={ () => history.push('/settings') }
-          data-testid="btn-settings"
-          type="button"
-        >
-          Configurações
-        </button>
+          </button>
+          <button
+            className="button is-link is-outlined"
+            onClick={ () => history.push('/settings') }
+            data-testid="btn-settings"
+            type="button"
+          >
+            Configurações
+          </button>
+        </div>
       </section>
     );
   }
