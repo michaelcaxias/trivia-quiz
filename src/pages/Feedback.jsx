@@ -24,7 +24,9 @@ class Feedback extends Component {
 
   savePlayerLocalStorage() {
     const { rankingList } = this.props;
-    localStorage.setItem('ranking', JSON.stringify(rankingList));
+    localStorage.setItem('ranking', JSON.stringify(
+      rankingList.sort((a, b) => b.score - a.score),
+    ));
   }
 
   render() {
