@@ -34,7 +34,7 @@
     "declaration-block-trailing-semicolon": "always",
     "declaration-colon-space-after": "always",
     "declaration-empty-line-before": "never",
-    "declaration-no-important": true,
+    "declaration-no-important": null,
     "font-family-name-quotes": "always-where-required",
     "font-family-no-duplicate-names": true,
     "font-family-no-missing-generic-family-keyword": true,
@@ -55,7 +55,7 @@
         "baseIndentLevel": 1
       }
     ],
-    "keyframe-declaration-no-important": true,
+    "keyframe-declaration-no-important": null,
     "length-zero-no-unit": true,
     "linebreaks": "unix",
     "max-empty-lines": 2,

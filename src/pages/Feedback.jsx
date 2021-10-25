@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import Header from '../components/Header';
 import { updateRanking } from '../redux/actions';
 import GRAVATAR_EMAIL from '../services';
+import './Feedback.css';
 
 class Feedback extends Component {
   async componentDidMount() {
@@ -35,34 +36,38 @@ class Feedback extends Component {
     return (
       <>
         <Header />
-        <main>
+        <main className="main-content">
           <h2 data-testid="feedback-total-score">
-            { score }
+            { `Pontuação : ${score}` }
           </h2>
           <h2 data-testid="feedback-total-question">
-            { assertions }
+            { `Acertos : ${assertions} `}
           </h2>
           <h1 data-testid="feedback-text">
             {
               assertions >= THREE ? 'Mandou bem!' : 'Podia ser melhor...'
             }
           </h1>
-          <button
-            data-testid="btn-play-again"
-            type="button"
-            onClick={ () => history.push('/') }
-          >
-            Jogar Novamente
+          <section className="buttons">
+            <button
+              className="btn"
+              data-testid="btn-play-again"
+              type="button"
+              onClick={ () => history.push('/') }
+            >
+              Jogar Novamente
 
-          </button>
-          <button
-            data-testid="btn-ranking"
-            onClick={ () => history.push('/ranking') }
-            type="button"
-          >
-            Ver Ranking
+            </button>
+            <button
+              className="btn"
+              data-testid="btn-ranking"
+              onClick={ () => history.push('/ranking') }
+              type="button"
+            >
+              Ver Ranking
 
-          </button>
+            </button>
+          </section>
         </main>
       </>
     );

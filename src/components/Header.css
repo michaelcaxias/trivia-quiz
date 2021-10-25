@@ -1,0 +1,12 @@
+.header {
+  align-items: center;
+  background-color: rgb(124, 165, 165);
+  color: white;
+  display: flex;
+  font-size: 25px;
+  justify-content: space-around;
+}
+
+.gravatar {
+  border-radius: 40px;
+}

@@ -5,6 +5,12 @@ import Header from '../components/Header';
 import { fetchTrivia, sendInfosPlayer } from '../redux/actions';
 import './Trivia.css';
 
+const encodeUtf8 = (string) => {
+  // função do Lucas Rodrigues Turma 08
+  const stringUTF = unescape(encodeURIComponent(string));
+  return stringUTF.replace(/&quot;|&#039;/gi, '\'');
+};
+
 class Trivia extends Component {
   constructor(props) {
     super(props);
@@ -154,33 +160,42 @@ class Trivia extends Component {
     const { time, questionIndex } = this.state;
     const { category, question, correct_answer: correctAnswer,
       incorrect_answers: incorrectAnswers } = questions[questionIndex];
+    const correctAnswerElement = (
+      <button
+        data-testid="correct-answer"
+        className="correct-answer btn"
+        name="right"
+        type="button"
+        onClick={ this.handleClick }
+      >
+        { encodeUtf8(correctAnswer) }
+
+      </button>
+    );
+    const incorrectAnswersElement = incorrectAnswers.map((answer, i) => (
+      <button
+        key={ i }
+        data-testid={ `wrong-answer-${i}` }
+        className="wrong-answer btn"
+        name="wrong"
+        type="button"
+        onClick={ this.handleClick }
+      >
+        { encodeUtf8(answer) }
+
+      </button>
+    ));
+
     return (
-      <section>
-        <p data-testid="question-category">{ category }</p>
-        <p data-testid="question-text">{ question }</p>
+      <section className="section">
+        <h1 className="timer">
+          { time }
+        </h1>
+        <p className="category" data-testid="question-category">{ category }</p>
+        <p className="question" data-testid="question-text">{ encodeUtf8(question) }</p>
         <section>
-          <button
-            data-testid="correct-answer"
-            className="correct-answer"
-            name="right"
-            type="button"
-            onClick={ this.handleClick }
-          >
-            { correctAnswer }
-
-          </button>
-          { incorrectAnswers.map((answer, i) => (
-            <button
-              key={ i }
-              data-testid={ `wrong-answer-${i}` }
-              className="wrong-answer"
-              name="wrong"
-              type="button"
-              onClick={ this.handleClick }
-            >
-              { answer }
-
-            </button>
+          { [...incorrectAnswersElement, correctAnswerElement].sort(({ props: { children: a } }, { props: { children: b } }) => (
+            a.localeCompare(b)
           )) }
         </section>
         <button
@@ -192,9 +207,6 @@ class Trivia extends Component {
           Próxima
 
         </button>
-        <h1>
-          { time }
-        </h1>
       </section>
     );
   }
