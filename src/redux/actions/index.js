@@ -3,6 +3,7 @@ export const GET_EMAIL = 'GET_EMAIL';
 export const REQUESTING_ENDPOINT = 'REQUESTING_ENDPOINT';
 export const GET_JSON = 'GET_JSON';
 export const GET_PLAYER = 'GET_PLAYER';
+export const UPDATE_RANKING = 'UPDATE_RANKING';
 
 export const getName = (payload) => ({
   type: GET_NAME,
@@ -25,6 +26,11 @@ export const getJson = (payload) => ({
 
 export const sendInfosPlayer = (payload) => ({
   type: GET_PLAYER,
+  payload,
+});
+
+export const updateRanking = (payload) => ({
+  type: UPDATE_RANKING,
   payload,
 });
 

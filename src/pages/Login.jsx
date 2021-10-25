@@ -36,46 +36,48 @@ class Login extends Component {
     const { history } = this.props;
     const disabled = name !== '' && email !== '';
     return (
-      <section className="conteiner">
-        <input
-          className="input is-primary"
-          type="text"
-          data-testid="input-player-name"
-          name="name"
-          value={ name }
-          onChange={ this.handleChange }
-          placeholder="Nome"
-        />
-        <input
-          className="input is-primary"
-          type="text"
-          data-testid="input-gravatar-email"
-          name="email"
-          value={ email }
-          onChange={ this.handleChange }
-          placeholder="Email"
-        />
-        <div>
-          <button
-            className="button is-primary is-outlined"
-            type="button"
-            disabled={ !disabled }
-            onClick={ this.handleClick }
-            data-testid="btn-play"
-          >
-            Jogar
+      <main className="main-container">
+        <section className="conteiner">
+          <input
+            className="input"
+            type="text"
+            data-testid="input-player-name"
+            name="name"
+            value={ name }
+            onChange={ this.handleChange }
+            placeholder="Nome"
+          />
+          <input
+            className="input"
+            type="text"
+            data-testid="input-gravatar-email"
+            name="email"
+            value={ email }
+            onChange={ this.handleChange }
+            placeholder="Email"
+          />
+          <div className="buttons">
+            <button
+              className="button is-primary is-outlined"
+              type="button"
+              disabled={ !disabled }
+              onClick={ this.handleClick }
+              data-testid="btn-play"
+            >
+              Jogar
 
-          </button>
-          <button
-            className="button is-link is-outlined"
-            onClick={ () => history.push('/settings') }
-            data-testid="btn-settings"
-            type="button"
-          >
-            Configurações
-          </button>
-        </div>
-      </section>
+            </button>
+            <button
+              className="button is-link is-outlined"
+              onClick={ () => history.push('/settings') }
+              data-testid="btn-settings"
+              type="button"
+            >
+              Configurações
+            </button>
+          </div>
+        </section>
+      </main>
     );
   }
 }

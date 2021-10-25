@@ -113,7 +113,7 @@ Você pode acessar um **protótipo** completo da interface desejada para o proje
 
   - Serão cinco dias de projeto.
 
-  - Data de entrega para avaliação final do projeto: `dd/mm/yyyy - 14:00h`.
+  - Data de entrega para avaliação final do projeto: `02/11/2021 - 14:00h`.
 
 ---
 
