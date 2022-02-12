@@ -8,7 +8,7 @@ class Header extends Component {
   render() {
     const { player: { name, gravatarEmail, score } } = this.props;
     return (
-      <header className="header">
+      <header className="header-container">
         <img
           className="gravatar"
           src={ gravatarImage(gravatarEmail) }

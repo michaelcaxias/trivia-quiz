@@ -1,9 +1,12 @@
 .main-content {
   align-items: center;
+  background-image: url('https://thumbs.dreamstime.com/b/pontos-de-interroga%C3%A7%C3%A3o-coloridos-em-um-fundo-preto-101946275.jpg');
+  background-size: cover;
+  color: white;
   display: flex;
   flex-direction: column;
   font-size: 30px;
   gap: 3vh;
-  height: 80vh;
+  height: calc(100vh - 78px);
   justify-content: center;
 }

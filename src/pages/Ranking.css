@@ -1,13 +1,30 @@
 .table-container {
+  background-image: url('https://thumbs.dreamstime.com/b/pontos-de-interroga%C3%A7%C3%A3o-coloridos-em-um-fundo-preto-101946275.jpg');
+  background-size: cover;
   border: 1px solid black;
+  color: white ! important;
   display: flex;
   flex-direction: column;
   font-size: 20px;
+  height: calc(100vh - 78px);
   justify-content: center;
   padding: 20px;
   text-align: center;
 }
 
+.content {
+  color: white;
+}
+
 .table-container table {
   width: 100% ! important;
 }
+
+.table-container th {
+  color: white ! important;
+}
+
+.table-container td {
+  color: white ! important;
+}
+

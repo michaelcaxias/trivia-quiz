@@ -50,7 +50,7 @@ class Feedback extends Component {
           </h1>
           <section className="buttons">
             <button
-              className="btn"
+              className="button"
               data-testid="btn-play-again"
               type="button"
               onClick={ () => history.push('/') }
@@ -59,7 +59,7 @@ class Feedback extends Component {
 
             </button>
             <button
-              className="btn"
+              className="button"
               data-testid="btn-ranking"
               onClick={ () => history.push('/ranking') }
               type="button"

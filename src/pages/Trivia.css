@@ -15,20 +15,16 @@
   display: block;
   font-size: 17px;
   margin: 30px;
-  margin-left: 45vw;
-  padding: 10px;
 }
 
 .question {
   align-items: center;
-  background-color: rgb(199, 224, 224);
+  background: linear-gradient(19deg, #3eecac, #ee74e1);
   border: 1px solid black;
   border-radius: 10px;
   display: flex;
   font-size: 30px;
   height: 200px;
-  justify-content: center;
-  margin-left: 25%;
   width: 50%;
 }
 
@@ -46,10 +42,24 @@
 }
 
 .section {
+  align-items: center;
+  background-image: url('https://thumbs.dreamstime.com/b/pontos-de-interroga%C3%A7%C3%A3o-coloridos-em-um-fundo-preto-101946275.jpg');
+  background-size: cover;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 78px);
+  padding: 0;
   text-align: center;
 }
 
 .category {
   font-size: 20px;
   margin: 2px;
+}
+
+.alternatives {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
 }

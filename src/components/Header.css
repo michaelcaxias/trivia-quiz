@@ -1,12 +1,14 @@
-.header {
+.header-container {
   align-items: center;
-  background-color: rgb(124, 165, 165);
+  background: linear-gradient(19deg, #3eecac, #ee74e1);
   color: white;
   display: flex;
   font-size: 25px;
   justify-content: space-around;
+  padding: 1rem;
 }
 
 .gravatar {
   border-radius: 40px;
+  width: 50px;
 }

@@ -37,6 +37,11 @@ class Login extends Component {
     const disabled = name !== '' && email !== '';
     return (
       <main className="main-container">
+        <img
+          src="https://www.trivia20.com/uploads/homecontent_img/online-trivia-game-play-with-zoom.png"
+          alt="trivia logo"
+          className="logo-trivia"
+        />
         <section className="conteiner">
           <input
             className="input"

@@ -123,29 +123,29 @@ class Trivia extends Component {
 
   borderColor() {
     clearInterval(this.timer);
-    const rightBtn = document.querySelector('.correct-answer');
-    const wrongBtn = document.querySelectorAll('.wrong-answer');
+    const rightBtn = document.querySelector('[name="right"]');
+    const wrongBtn = document.querySelectorAll('[name="wrong"]');
     const nextBtn = document.querySelector('.btn-next');
-    rightBtn.classList.add('correct_answer');
+    rightBtn.classList.add('is-success');
     rightBtn.disabled = true;
     wrongBtn.forEach((button) => {
-      button.classList.add('wrong_answer');
+      button.classList.add('is-danger');
       button.disabled = true;
     });
-    nextBtn.className = 'visible';
+    nextBtn.classList.toggle('visible');
   }
 
   removeColor() {
-    const rightBtn = document.querySelector('.correct-answer');
-    const wrongBtn = document.querySelectorAll('.wrong-answer');
+    const rightBtn = document.querySelector('[name="right"]');
+    const wrongBtn = document.querySelectorAll('[name="wrong"]');
     const nextBtn = document.querySelector('.visible');
-    rightBtn.classList.remove('correct_answer');
+    rightBtn.classList.remove('is-success');
     rightBtn.disabled = false;
     wrongBtn.forEach((button) => {
-      button.classList.remove('wrong_answer');
+      button.classList.remove('is-danger');
       button.disabled = false;
     });
-    nextBtn.className = 'btn-next';
+    nextBtn.classList.toggle('visible');
   }
 
   updateSeconds() {
@@ -163,7 +163,7 @@ class Trivia extends Component {
     const correctAnswerElement = (
       <button
         data-testid="correct-answer"
-        className="correct-answer btn"
+        className="button"
         name="right"
         type="button"
         onClick={ this.handleClick }
@@ -175,8 +175,7 @@ class Trivia extends Component {
     const incorrectAnswersElement = incorrectAnswers.map((answer, i) => (
       <button
         key={ i }
-        data-testid={ `wrong-answer-${i}` }
-        className="wrong-answer btn"
+        className="button"
         name="wrong"
         type="button"
         onClick={ this.handleClick }
@@ -193,16 +192,16 @@ class Trivia extends Component {
         </h1>
         <p className="category" data-testid="question-category">{ category }</p>
         <p className="question" data-testid="question-text">{ encodeUtf8(question) }</p>
-        <section>
-          { [...incorrectAnswersElement, correctAnswerElement].sort(({ props: { children: a } }, { props: { children: b } }) => (
-            a.localeCompare(b)
-          )) }
+        <section className="alternatives">
+          {[...incorrectAnswersElement, correctAnswerElement]
+            .sort(({ props: { children: a } }, { props: { children: b } }) => (
+              a.localeCompare(b)
+            )) }
         </section>
         <button
           onClick={ this.nextQuestion }
           type="button"
-          data-testid="btn-next"
-          className="btn-next"
+          className="button is-primary btn-next"
         >
           Próxima
 
