@@ -1,5 +1,5 @@
 
-<img src="https://i.imgur.com/4pSkWsd.gif" alt="preview da aplicação">
+<img src="https://im2.ezgif.com/tmp/ezgif-2-9175d59359.gif" alt="preview da aplicação">
 
 # Trivia
 
