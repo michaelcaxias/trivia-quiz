@@ -13,7 +13,7 @@ Projeto feito em grupo durante o curso da [Trybe](https://www.betrybe.com/) com 
 - Rota `/ranking` com o ranking de todos os jogadores.
 - Tela de detalhes do produto clicado com acesso a avaliações.
 
-## Habilidades utilizadas
+## ⭐ Habilidades
 
 - Consumir a API **https://opentdb.com/** para as perguntas e alternativas do jogo.
 - Utilizar o **Trello** para organização em grupo.
@@ -22,7 +22,7 @@ Projeto feito em grupo durante o curso da [Trybe](https://www.betrybe.com/) com 
 - Utilizar o framework **Bulma** para realizar estilizações.
 
 
-## Como iniciar
+## 💻 Como iniciar
 
 1. Faça o clone do projeto
 2. Instale as dependências
